@@ -31,3 +31,5 @@ class Form
 
         void beSigned(const Bureaucrat &x);
 };
+
+//surcharge <<
