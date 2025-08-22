@@ -7,7 +7,7 @@ int main()
     {
         Bureaucrat bob("Bob", 15000);
     }
-    catch (Bureaucrat::GradeTooHighException &e) 
+    catch (Bureaucrat::GradeTooHighException &e) //not the correct exception
     {
         std::cerr << e.what() << '\n';
         //problems
