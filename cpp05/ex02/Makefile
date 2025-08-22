@@ -1,12 +1,13 @@
 CXX = c++
 CXXFLAGS = -Wall -Wextra -Werror -std=c++98 -g
 
-NAME = ex01
+NAME = ex02
 
 SRC =   src/main.cpp \
 		src/Bureaucrat.cpp \
 		src/AForm.cpp \
 		src/ShrubberyCreationForm.cpp\
+		src/RobotomyRequestForm.cpp
 
 
 OBJDIR = .obj/
