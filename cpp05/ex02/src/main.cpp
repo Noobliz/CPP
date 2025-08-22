@@ -27,11 +27,18 @@ int main()
     alex.executeForm(*robot);
     alex.executeForm(*robot);
 
-        std::cout<<"\n|-----------[exec PardonFORM]-----------|"<<std::endl;
+    std::cout<<"\n|-----------[exec PardonFORM]-----------|"<<std::endl;
     AForm *pardon = new PresidentialPardonForm("Ernest");
     alex.signForm(*pardon);
     alex.executeForm(*pardon);
 
+    std::cout<<"\n|-----------[Grade too low]-----------|"<<std::endl;
+    Bureaucrat lol("Lol", 146);
+    ShrubberyCreationForm tree("tree");
+    lol.signForm(tree);
+    lol.promotion();
+    lol.signForm(tree);
+    lol.executeForm(tree);
 
     std::cout<<"\n|-----------[Destructors]-----------|"<<std::endl;
     delete test;
