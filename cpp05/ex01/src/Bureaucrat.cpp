@@ -79,7 +79,7 @@ void Bureaucrat::signForm(Form &x){
     }
     catch(const std::exception& e)
     {
-        std::cout<<this->getName()<<" couldn't signe "<<x.getName()<<" because ";
+        std::cout<<this->getName()<<" couldn't sign "<<x.getName()<<" because ";
         std::cerr << e.what() << '\n';
     }
     

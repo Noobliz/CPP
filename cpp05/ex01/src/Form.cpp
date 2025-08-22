@@ -26,7 +26,7 @@ Form& Form::operator=(const Form &other)
 
 Form::~Form()
 {
-    std::cout<<"Form destructor called\n";
+    std::cout<<getName()<<" Form destructor called\n";
 }
 
 std::string Form::getName()const{
@@ -61,4 +61,11 @@ void Form::beSigned(const Bureaucrat &x){
     if (x.getGrade() > this->getSignGrade())
         throw GradeTooLowException();
     this->_isSigned = true;
+}
+
+std::ostream& operator<<(std::ostream &cout, Form &x)
+{
+    cout<<x.getName()<<" sign_grade["<<x.getSignGrade()<<"] execution_grade["
+        <<x.getExecGrade()<<"]"<<" form signed status = "<<x.getIsSigned();
+    return cout;
 }
