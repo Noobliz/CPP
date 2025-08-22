@@ -10,7 +10,7 @@ _signGrade(signGrade), _execGrade(execGrade), _isSigned(false)
         throw GradeTooLowException();
 }
 
-Form::Form(const Form &other): _name(other._name), _signGrade(other._signGrade),
+Form::Form(const Form &other): _name(other._name + ".copy"), _signGrade(other._signGrade),
  _execGrade(other._execGrade), _isSigned(other._isSigned)
 {
 }
