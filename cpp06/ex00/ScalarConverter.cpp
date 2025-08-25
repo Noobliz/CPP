@@ -92,7 +92,9 @@ void printFromInt(const std::string &value)
         } 
         else if (intValue >= 0 && intValue <= 127) {
             std::cout << "char: Non displayable\n";
-        } 
+        }
+        else
+            std::cout<<"char : Impossible\n";
         
         
         std::cout << "int: " << intValue << "\n"
