@@ -2,6 +2,8 @@
 #include <vector>
 #include <string>
 #include <limits.h>
+#include <cstdlib>
+#include <sstream>
 
 //---------float :
 
@@ -18,6 +20,14 @@
 // "+inf"
 
 // "-inf"
+
+int stroi(const std::string &value) {
+    std::stringstream ss(value);
+    int result;
+    ss >> result;
+    return result;
+}
+
 bool pseudoLiterals(const std::string &value)
 {
     std::string type = "";
@@ -49,7 +59,7 @@ bool pseudoLiterals(const std::string &value)
 
 void    printFromChar(char c)
 {
-    std::cout<<"char : "<<c<<"\n"
+    std::cout<<"char : '"<<c<<"'\n"
             <<"int : "<<static_cast<int>(c)<<"\n"
             <<"float : "<<static_cast<float>(c)<<".0f\n"
             <<"double : "<<static_cast<double>(c)<<".0"<<std::endl;
@@ -63,10 +73,10 @@ bool isInteger(const std::string &value)
     if (value[0] == '+' || value[0] == '-')
         start = 1;
     
-    if (start >= value.length())
+    if (start >= static_cast<int>(value.length()))
         return false;
 
-    for (int i = start; i < value.length(); i++) {
+    for (int i = start; i < static_cast<int>(value.length()); i++) {
         if (!std::isdigit(value[i]))
             return false;
     }
@@ -85,7 +95,7 @@ void printFromInt(const std::string &value)
             return;
         }
         
-        int intValue = std::stoi(value, NULL, 10);
+        int intValue = stroi(value);
         
         if (intValue > 31 && intValue < 127) {
             std::cout << "char: '" << static_cast<char>(intValue) << "'\n";
@@ -101,6 +111,88 @@ void printFromInt(const std::string &value)
                   << "float: " << static_cast<float>(intValue) << ".0f\n"
                   << "double: " << static_cast<double>(intValue) << ".0" << std::endl;
     }
+
+bool isFloat(const std::string &value)
+{
+    if (value[value.size() - 1] != 'f')
+        return false;
+    
+    std::string withoutF = value.substr(0, value.length() - 1);
+    if (withoutF.empty())
+        return false;
+    
+    int start = 0;
+    bool hasDecimalPoint = false;
+    
+    if (withoutF[0] == '+' || withoutF[0] == '-')
+        start = 1;
+    
+    if (start >= static_cast<int>(withoutF.length()))
+        return false;
+
+    for (int i = start; i < static_cast<int>(withoutF.length()); i++) {
+        if (withoutF[i] == '.') {
+            if (hasDecimalPoint) //more than 1 "."
+                return false;
+            hasDecimalPoint = true;
+        }
+        else if (!std::isdigit(withoutF[i])) {
+            return false;
+        }
+    }
+
+    return hasDecimalPoint;
+}
+
+void printFromFloat(const std::string &value)
+{
+    // remove f
+    std::string withoutF = value.substr(0, value.length() - 1);
+
+    float floatValue = std::strtof(withoutF.c_str(), NULL);
+    
+    
+    // if printable and "full" for char
+    if (floatValue >= 32.0f && floatValue <= 126.0f && floatValue == static_cast<int>(floatValue)) {
+        std::cout << "char: '" << static_cast<char>(static_cast<int>(floatValue)) << "'\n";
+    }
+    else if (floatValue >= 0.0f && floatValue <= 127.0f && floatValue == static_cast<int>(floatValue)) {
+        std::cout << "char: Non displayable\n";
+    }
+    else {
+        std::cout << "char: impossible\n";
+    }
+    
+    // for int
+    if (floatValue > INT_MAX || floatValue < INT_MIN){
+        std::cout << "int: impossible\n";
+    }
+    else {
+        std::cout << "int: " << static_cast<int>(floatValue) << "\n";
+    }
+    
+    // Float depending of full value or not
+    if (floatValue == static_cast<int>(floatValue)) {
+        std::cout << "float: " << floatValue << ".0f\n";
+    }
+    else {
+        std::cout << "float: " << floatValue << "f\n";
+    }
+    
+    // Double same as above
+    double doubleValue = static_cast<double>(floatValue);
+    if (doubleValue == static_cast<int>(doubleValue)) {
+        std::cout << "double: " << doubleValue << ".0" << std::endl;
+    }
+    else {
+        std::cout << "double: " << doubleValue << std::endl;
+    }
+        
+}
+// bool    isChar(const std::string &value)
+// {
+
+// }
 void ScalarConverter::convert(const std::string &value)
 {
     if (value.empty())
@@ -115,11 +207,14 @@ void ScalarConverter::convert(const std::string &value)
         printFromInt(value);
         return ;
     }
-    //if isfloat
+    if (isFloat(value)){
+        printFromFloat(value);
+        return ;
+    }
 
     //if isdouble
     else
-        std::cout<<"non printable\n";
+        std::cout<<"Error\n";
         
     return ;
     

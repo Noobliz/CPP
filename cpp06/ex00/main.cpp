@@ -1,16 +1,16 @@
 #include "ScalarConverter.hpp"
 
-int main(void)
+int main(int argc, char **argv)
 {
-    char c = 'c';
-
+    //char c = 'c';
+    if (argc != 2)
+        return 0;
     //non printable char
     // std::string g = "~";
     // for (int i = 0; i < 2; i++)
     //     g[0] +=1;
-
-     ScalarConverter::convert("+1255");
-    float a = 42.6f;
+     ScalarConverter::convert(argv[1]);
+    //float a = 42.6f;
     //std::cout<<"a : "<<static_cast<int>(a)<<std::endl;
     return 0;
 }
