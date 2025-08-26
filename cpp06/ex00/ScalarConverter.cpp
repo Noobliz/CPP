@@ -59,10 +59,16 @@ bool pseudoLiterals(const std::string &value)
 
 void    printFromChar(char c)
 {
-    std::cout<<"char : '"<<c<<"'\n"
-            <<"int : "<<static_cast<int>(c)<<"\n"
-            <<"float : "<<static_cast<float>(c)<<".0f\n"
-            <<"double : "<<static_cast<double>(c)<<".0"<<std::endl;
+    if (std::isprint(c))
+        std::cout<<"char : '"<<c<<"'\n";
+    else
+        std::cout<<"char : non displayable\n";
+
+    std::cout<<"int : "<<static_cast<int>(c)<<"\n"
+        <<"float : "<<static_cast<float>(c)<<".0f\n"
+        <<"double : "<<static_cast<double>(c)<<".0"<<std::endl;
+
+
 }
 
 bool isInteger(const std::string &value)
@@ -199,7 +205,7 @@ void ScalarConverter::convert(const std::string &value)
         return ;
     if (pseudoLiterals(value))
         return ;
-    if (value.length() == 1 && std::isprint(value[0]) && !std::isdigit(value[0])){
+    if (value.length() == 1 && !std::isdigit(value[0])){
         printFromChar(value[0]);
         return ;
     }
