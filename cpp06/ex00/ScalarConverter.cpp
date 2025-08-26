@@ -93,7 +93,7 @@ void printFromInt(const std::string &value)
 {
     long longValue = std::strtol(value.c_str(), NULL, 10);
         
-        if (longValue > INT_MAX || longValue < INT_MIN) {
+        if (longValue > static_cast<float>(INT_MAX) || longValue < static_cast<float>(INT_MIN)) {
             std::cout << "char: impossible\n"
                       << "int: impossible (overflow)\n"
                       << "float: " << static_cast<float>(longValue) << "f\n"
@@ -170,7 +170,7 @@ void printFromFloat(const std::string &value)
     }
     
     // for int
-    if (floatValue > INT_MAX || floatValue < INT_MIN){
+    if (floatValue > static_cast<float>(INT_MAX) || floatValue < static_cast<float>(INT_MIN)){
         std::cout << "int: impossible\n";
     }
     else {
@@ -195,10 +195,71 @@ void printFromFloat(const std::string &value)
     }
         
 }
-// bool    isChar(const std::string &value)
-// {
+void    printFromDouble(const std::string &value){
+    double doubleValue = std::strtod(value.c_str(), NULL);
+    if (doubleValue >= 32.0 && doubleValue <= 126.0 && doubleValue == static_cast<int>(doubleValue)) {
+        std::cout << "char: '" << static_cast<char>((doubleValue)) << "'\n";
+    }
+    else if (doubleValue >= 0.0f && doubleValue <= 127.0f && doubleValue == static_cast<int>(doubleValue)) {
+        std::cout << "char: Non displayable\n";
+    }
+    else {
+        std::cout << "char: impossible\n";
+    }
+    
+    // for int
+    if (doubleValue > INT_MAX || doubleValue < INT_MIN){
+        std::cout << "int: impossible\n";
+    }
+    else {
+        std::cout << "int: " << static_cast<int>(doubleValue) << "\n";
+    }
+    
+    // Float depending of full value or not
+    
+    float floatValue = static_cast<float>(doubleValue);
+    if (floatValue == static_cast<int>(floatValue)) {
+        std::cout << "float: " << floatValue << ".0f\n";
+    }
+    else {
+        std::cout << "float: " << floatValue << "f\n";
+    }
+    
+    // Double same as above
+    if (doubleValue == static_cast<int>(doubleValue)) {
+        std::cout << "double: " << doubleValue << ".0" << std::endl;
+    }
+    else {
+        std::cout << "double: " << doubleValue << std::endl;
+    }
+    
+}
 
-// }
+bool    isDouble(const std::string &value)
+{
+    int start = 0;
+    bool hasDecimalPoint = false;
+    
+    if (value[0] == '+' || value[0] == '-')
+        start = 1;
+    
+    if (start >= static_cast<int>(value.length()))
+        return false;
+
+    for (int i = start; i < static_cast<int>(value.length()); i++) {
+        if (value[i] == '.') {
+            if (hasDecimalPoint) //more than 1 "."
+                return false;
+            hasDecimalPoint = true;
+        }
+        else if (!std::isdigit(value[i])) {
+            return false;
+        }
+    }
+    return true;
+}
+
+
 void ScalarConverter::convert(const std::string &value)
 {
     if (value.empty())
@@ -218,9 +279,12 @@ void ScalarConverter::convert(const std::string &value)
         return ;
     }
 
-    //if isdouble
+    if (isDouble(value)){
+        printFromDouble(value);
+        return ;
+    }
     else
-        std::cout<<"Error\n";
+        std::cerr<<"Error\n";
         
     return ;
     
