@@ -11,7 +11,5 @@ int main(int argc, char **argv)
     //     g[0] +=1;
     // (void)argv;
      ScalarConverter::convert(argv[1]);
-    //float a = 42.6f;
-    //std::cout<<"a : "<<static_cast<int>(a)<<std::endl;
     return 0;
 }
