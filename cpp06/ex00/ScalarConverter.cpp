@@ -5,30 +5,15 @@
 #include <cstdlib>
 #include <sstream>
 
-//---------float :
 
-// "nanf"
-
-// "+inff"
-
-// "-inff"
-
-// -------double :
-
-// "nan"
-
-// "+inf"
-
-// "-inf"
-
-int stroi(const std::string &value) {
+static int stroi(const std::string &value) {
     std::stringstream ss(value);
     int result;
     ss >> result;
     return result;
 }
 
-bool pseudoLiterals(const std::string &value)
+static bool pseudoLiterals(const std::string &value)
 {
     std::string type = "";
     std::string pseudoLiteralsF[] = {"-inff", "+inff", "inff", "nanf"};
@@ -57,7 +42,7 @@ bool pseudoLiterals(const std::string &value)
     return false;
 }
 
-void    printFromChar(char c)
+static void    printFromChar(char c)
 {
     if (std::isprint(c))
         std::cout<<"char : '"<<c<<"'\n";
@@ -71,7 +56,7 @@ void    printFromChar(char c)
 
 }
 
-bool isInteger(const std::string &value)
+static bool isInteger(const std::string &value)
 {
 
     int start = 0;
@@ -89,7 +74,7 @@ bool isInteger(const std::string &value)
     
     return true;
 }
-void printFromInt(const std::string &value)
+static void printFromInt(const std::string &value)
 {
     long longValue = std::strtol(value.c_str(), NULL, 10);
         
@@ -118,7 +103,7 @@ void printFromInt(const std::string &value)
                   << "double: " << static_cast<double>(intValue) << ".0" << std::endl;
     }
 
-bool isFloat(const std::string &value)
+static bool isFloat(const std::string &value)
 {
     if (value[value.size() - 1] != 'f')
         return false;
@@ -150,7 +135,7 @@ bool isFloat(const std::string &value)
     return hasDecimalPoint;
 }
 
-void printFromFloat(const std::string &value)
+static void printFromFloat(const std::string &value)
 {
     // remove f
     std::string withoutF = value.substr(0, value.length() - 1);
@@ -195,7 +180,7 @@ void printFromFloat(const std::string &value)
     }
         
 }
-void    printFromDouble(const std::string &value){
+static void    printFromDouble(const std::string &value){
     double doubleValue = std::strtod(value.c_str(), NULL);
     if (doubleValue >= 32.0 && doubleValue <= 126.0 && doubleValue == static_cast<int>(doubleValue)) {
         std::cout << "char: '" << static_cast<char>((doubleValue)) << "'\n";
@@ -235,7 +220,7 @@ void    printFromDouble(const std::string &value){
     
 }
 
-bool    isDouble(const std::string &value)
+static bool    isDouble(const std::string &value)
 {
     int start = 0;
     bool hasDecimalPoint = false;
