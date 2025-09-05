@@ -18,6 +18,14 @@ class Span{
         int shortestSpan()const;
         int longestSpan()const;
 
+        template<typename T>
+        void    addRange(T first, T last)
+        {
+            size_t distance = std::distance(first, last);
+            if (_v.size() + distance >= _capacity)
+                throw spanException("Not enough capacity to add numbers\n");
+            _v.insert(_v.end(), first, last);
+        }
 
 
 

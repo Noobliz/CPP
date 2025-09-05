@@ -33,6 +33,7 @@ void    Span::addNumber(unsigned int n)
     if(_v.size() >= _capacity)
         throw std::out_of_range("vector is full\n");
     _v.push_back(n);
+
 }
 
 
