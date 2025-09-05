@@ -1,6 +1,6 @@
 # STL Functions Used in CPP08 Exercise 01 - Span Class
 
-This README documents all the Standard Template Library (STL) functions and components used in the implementation of the Span class for the 42 School CPP08 exercise 01.
+This README documents all the Standard Template Library (STL) functions and components used in the implementation of the Span class.
 
 ## STL Containers
 
