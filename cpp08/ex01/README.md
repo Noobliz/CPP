@@ -57,11 +57,6 @@ This README documents all the Standard Template Library (STL) functions and comp
 
 ## STL Utilities and Constants
 
-### `std::string`
-- **Purpose**: String class for storing error messages
-- **Usage**: Used in the `spanException` class to store custom error messages
-- **Key Method**: `c_str()` - returns C-style string representation
-
 ### `INT_MAX`
 - **Header**: `<climits>` or `<limits>`
 - **Purpose**: Maximum value for int type
