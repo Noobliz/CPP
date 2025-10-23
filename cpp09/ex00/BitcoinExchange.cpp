@@ -95,12 +95,11 @@ static bool isValidFormat(const std::string &date, int &year, int &month, int &d
         return false;
     if (!(iss >> year >> dash1 >> month >> dash2 >> day))
     {
-        std::cout<<"hello\n";
+       // std::cout<<"hello\n";
         return false;
     }
     if (dash1 != '-' || dash2 != '-')
     {
-        std::cout<<"hello\n";
         return false;
     }
     return true;
