@@ -10,6 +10,8 @@ class PmergeMe
     private:
         std::vector<int>    _vector;
         std::deque<int>     _deque;
+
+        std::vector<int>    _JacobSuite;
     
     public:
         PmergeMe();
