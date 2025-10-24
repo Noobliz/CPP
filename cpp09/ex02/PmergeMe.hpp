@@ -14,4 +14,6 @@ class PmergeMe
     public:
         PmergeMe();
         bool storeNb(char **argv, int argc);
+        void sort();
+        void sortVector(std::vector<int> &v);
 };
