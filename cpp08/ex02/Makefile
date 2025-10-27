@@ -3,7 +3,7 @@ CXXFLAGS = -Wall -Wextra -Werror -std=c++98 -g
 
 NAME = ex02
 
-SRC =   main.cpp\
+SRC =   src/main.cpp\
 
 
 OBJDIR = .obj/
