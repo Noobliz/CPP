@@ -3,8 +3,8 @@ CXXFLAGS = -Wall -Wextra -Werror -std=c++98 -g
 
 NAME = RPN
 
-SRC =   main.cpp\
-		RPN.cpp\
+SRC =   src/main.cpp\
+		src/RPN.cpp\
 
 
 OBJDIR = .obj/
