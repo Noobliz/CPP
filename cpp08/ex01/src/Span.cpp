@@ -34,7 +34,13 @@ void    Span::addNumber(unsigned int n)
 
 }
 
-
+void    Span::addRange(std::vector<int>::iterator first, std::vector<int>::iterator last)
+{
+    size_t distance = std::distance(first, last);
+    if (_v.size() + distance > _capacity)
+        throw spanException("Not enough capacity to add numbers\n");
+    _v.insert(_v.end(), first, last);   
+}
 
 //std::adjacent_difference(first, last, result): calculate diff between
 //consecutive elements and writes them in "diff". 

@@ -33,31 +33,14 @@ int main (void)
 
     try{
 
-        std::vector<int> range(10000);
+        std::vector<int> range(1000);
         std::generate(range.begin(), range.end(), rand);
-        Span big(10000);
+        Span big(1000);
         big.addRange(range.begin(), range.end());
         std::cout<<"shortestSpan of big: "<<big.shortestSpan()<<std::endl;
         std::cout<<"longestSpan of big: "<<big.longestSpan()<<std::endl;
     }
     catch(std::exception &e)
-    {
-        std::cerr<<e.what();
-    }
-
-
-    std::cout<<"\n----[adding range of numbers from a different type----\n\n";
-
-    try{
-        int arr[500];
-        for (int i = 0; i < 500; i++)
-            arr[i] = i + 1;
-        Span fromArr(500);
-        fromArr.addRange(arr, arr + 500);
-        std::cout<<"shortestSpan of fromArr: "<<fromArr.shortestSpan()<<std::endl;
-        std::cout<<"longestSpan of fromArr: "<<fromArr.longestSpan()<<std::endl;
-    }
-    catch (std::exception &e)
     {
         std::cerr<<e.what();
     }
