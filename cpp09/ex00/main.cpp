@@ -13,9 +13,7 @@ int main(int argc, char **argv)
     std::string fileName = "cpp_09/data.csv";
     
     try{
-        
         BitcoinExchange btc(fileName);
-        //btc.loadRates(fileName);
         btc.calculateValue(argv[1]);
     }
     catch(std::exception &e)

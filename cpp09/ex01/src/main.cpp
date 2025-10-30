@@ -13,7 +13,6 @@ int main(int argc, char **argv)
             if (i < argc -1)
                 values += " ";
         }
-        //std::cout<<"values = "<<values<<std::endl;
         RPN(values);
     }
     else

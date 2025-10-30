@@ -11,7 +11,9 @@ BitcoinExchange::BitcoinExchange(const BitcoinExchange &copy){
 }
 BitcoinExchange& BitcoinExchange::operator=(const BitcoinExchange &other)
 {
-    (void)other;
+    if (this != &other)
+        _btcRates = other._btcRates;
+
     return *this;
 }
 BitcoinExchange::~BitcoinExchange(){}
@@ -50,9 +52,6 @@ BitcoinExchange::BitcoinExchange(const std::string &fileName)
     }
     if (check == 0)
         throw std::runtime_error("database is not exploitable");
-    //test
-    // for (std::map<std::string, float>::iterator it = _btcRates.begin(); it != _btcRates.end(); ++it)
-    //     std::cout << it->first << " => " << it->second << "\n";
 }
 
 
@@ -95,7 +94,6 @@ static bool isValidFormat(const std::string &date, int &year, int &month, int &d
         return false;
     if (!(iss >> year >> dash1 >> month >> dash2 >> day))
     {
-       // std::cout<<"hello\n";
         return false;
     }
     if (dash1 != '-' || dash2 != '-')
@@ -116,6 +114,8 @@ static bool isValdiDate(int year, int month, int day)
 
 void BitcoinExchange::calculateValue(const std::string &inputName)
 {
+    if (_btcRates.empty())
+        return ;
     std::ifstream input(inputName.c_str());
     if (!input.is_open())
         throw std::runtime_error("open failed");
@@ -149,12 +149,6 @@ void BitcoinExchange::calculateValue(const std::string &inputName)
         }
         
         //====parsing date=====
-        //line lenght = 10
-        // 2 '-'
-        //std::cerr<<"year is : "<<y<<std::endl;
-        //4 digits, 2 digits, 2digits
-        //year = >2008 | month = >00 && <= 12 || days = >0 && < 30 or 31 or (feb:28 or 29)
-        //
         int y, m, d = 0;
         if (!isValidFormat(date, y, m, d) || !isValdiDate(y, m, d))
         {
@@ -172,8 +166,6 @@ void BitcoinExchange::calculateValue(const std::string &inputName)
             --it;
         }
         float result = value * it->second;
-        //std::cout << "found: " << it->first << " => " << it->second << "\n";
         std::cout<<date <<" => "<<value<<" = " <<result<< std::endl;
-        //std::cout << "[" << date << "] => [" << valueStr << "]\n"; // test for trim
     }
 }

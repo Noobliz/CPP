@@ -7,11 +7,11 @@ class BitcoinExchange
     private:
         std::map<std::string, float> _btcRates;
 
+    public:
         BitcoinExchange();
+        BitcoinExchange(const std::string &fileName);
         BitcoinExchange(const BitcoinExchange &copy);
         BitcoinExchange &operator=(const BitcoinExchange &other);
-    public:
-        BitcoinExchange(const std::string &fileName);
         ~BitcoinExchange();
 
         void calculateValue(const std::string& inputName);

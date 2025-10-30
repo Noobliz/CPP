@@ -92,16 +92,6 @@ void PmergeMe::sortVector(std::vector<int> &v)
         }
     }
     
-    // std::cout<<"big: ";   
-    // for (size_t i = 0; i < big.size(); ++i)
-    // std::cout<<big[i]<<" ";
-    // std::cout<<std::endl;
-    
-    // std::cout<<"small: ";   
-    // for (size_t i = 0; i < small.size(); ++i)
-    // std::cout<<small[i]<<" ";
-    // std::cout<<std::endl;
-    
     sortVector(big);
     //==================================|JACOB|========================================================
 
@@ -219,11 +209,11 @@ void PmergeMe::sort()
     std::cout<<std::endl;
 
     //====display time=====
-    double time = static_cast<double>(vEnd - vStart) / CLOCKS_PER_SEC;
+    double time = static_cast<double>(vEnd - vStart) * 1000 / CLOCKS_PER_SEC;
     std::cout<<"Time to process a range of "<<_vector.size()
-        <<" elements with std::vector : "<<time<<" s"<<std::endl;
-    time = static_cast<double>(dEnd - dStart) / CLOCKS_PER_SEC;
+        <<" elements with std::vector : "<<time<<" ms"<<std::endl;
+    time = static_cast<double>(dEnd - dStart) * 1000 / CLOCKS_PER_SEC;
 
     std::cout<<"Time to process a range of "<<_deque.size()
-        <<" elements with std::deque : "<<time<<" s"<<std::endl;
+        <<" elements with std::deque : "<<time<<" ms"<<std::endl;
 }
