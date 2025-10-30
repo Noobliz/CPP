@@ -7,8 +7,8 @@ class Span{
     private:
         unsigned int _capacity;
         std::vector<int> _v;
-        Span();
     public:
+        Span();
         Span(unsigned int n);
         Span(const Span &copy);
         ~Span();

@@ -2,8 +2,10 @@
 #include <stdexcept>
 #include <algorithm>
 #include <numeric>
-# include <limits>
+#include <limits>
 #include <climits>
+
+Span::Span():_capacity(0){}
 
 Span::Span(unsigned int n): _capacity(n){
     _v.reserve(n);//reserve n capacity in the vector (allocate n space)
