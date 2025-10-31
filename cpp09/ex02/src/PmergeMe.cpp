@@ -239,7 +239,7 @@ void PmergeMe::sort(int argc, char **argv)
     
     std::cout<<"After : "; 
     for (size_t i = 0; i < _vector.size(); ++i)
-        std::cout<<_deque[i]<<" ";
+        std::cout<<_vector[i]<<" ";
     std::cout<<std::endl;
 
     //====display time=====
