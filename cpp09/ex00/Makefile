@@ -3,8 +3,8 @@ CXXFLAGS = -Wall -Wextra -Werror -std=c++98 -g
 
 NAME = btc
 
-SRC =   main.cpp\
-		BitcoinExchange.cpp\
+SRC =   src/main.cpp\
+		src/BitcoinExchange.cpp\
 
 
 OBJDIR = .obj/

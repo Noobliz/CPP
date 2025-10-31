@@ -1,4 +1,4 @@
-#include "BitcoinExchange.hpp"
+#include "../inc/BitcoinExchange.hpp"
 
 int main(int argc, char **argv)
 {
@@ -10,7 +10,7 @@ int main(int argc, char **argv)
             std::cerr<<"input exactly 1 file"<<std::endl;
         return (1);
     }
-    std::string fileName = "cpp_09/data.csv";
+    std::string fileName = "data.csv";
     
     try{
         BitcoinExchange btc(fileName);

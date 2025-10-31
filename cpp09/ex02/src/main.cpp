@@ -10,7 +10,5 @@ int main(int argc, char **argv)
         return (1);
     }
     PmergeMe p;
-    if (!p.storeNb(argv, argc))
-        return (1);
-    p.sort();
+    p.sort(argc, argv);
 }

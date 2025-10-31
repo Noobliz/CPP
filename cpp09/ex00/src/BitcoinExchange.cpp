@@ -1,4 +1,4 @@
-#include "BitcoinExchange.hpp"
+#include "../inc/BitcoinExchange.hpp"
 #include <fstream>
 #include <exception>
 #include <stdlib.h>
@@ -115,7 +115,10 @@ static bool isValdiDate(int year, int month, int day)
 void BitcoinExchange::calculateValue(const std::string &inputName)
 {
     if (_btcRates.empty())
+    {
+        std::cerr<<"Error: input was not loaded"<<std::endl;
         return ;
+    }
     std::ifstream input(inputName.c_str());
     if (!input.is_open())
         throw std::runtime_error("open failed");
@@ -127,6 +130,7 @@ void BitcoinExchange::calculateValue(const std::string &inputName)
     if (line != "date | value" || line.empty())
         std::cerr<<"input file should start with 'date | value' : ignoring line"<<std::endl;
     
+    int check = 0; //check that at least 1 line is exploitable
     while (std::getline(input, line))
     {
         if (line.empty())
@@ -167,5 +171,8 @@ void BitcoinExchange::calculateValue(const std::string &inputName)
         }
         float result = value * it->second;
         std::cout<<date <<" => "<<value<<" = " <<result<< std::endl;
+        check++;
     }
+    if (check == 0)
+        std::cerr<<"Error: input file is not exploitable"<<std::endl;
 }

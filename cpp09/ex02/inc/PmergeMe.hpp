@@ -8,7 +8,7 @@
 class PmergeMe
 {
     private:
-        std::vector<int>    _vector;
+        std::vector<int>    _vector;//memory reallocated every time
         std::deque<int>     _deque;//memory is not contiguous
 
         std::vector<int>    _JacobSuite;
@@ -19,9 +19,12 @@ class PmergeMe
         PmergeMe& operator=(const PmergeMe &other);
         ~PmergeMe();
 
-        
-        bool storeNb(char **argv, int argc);
-        void sort();
+
+        bool storeVector(char **argv, int argc);
+        bool storeDeque(char **argv, int argc);
+
+
+        void sort(int argc, char **argv);
         void sortVector(std::vector<int> &v);
         void sortDeque(std::deque<int> &d); 
 

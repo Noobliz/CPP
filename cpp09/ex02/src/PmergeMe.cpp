@@ -34,8 +34,29 @@ PmergeMe::~PmergeMe(){}
 
 
 
+bool PmergeMe::storeDeque(char **argv, int argc)
+{
+    for(int i = 1; i < argc; ++i)
+    {
+        std::istringstream iss(argv[i]);
+        int num = 0;
+        if (!(iss >> num) || num < 0 || iss.peek() != EOF)//only digits
+        {
+            std::cerr<<"Error"<<std::endl;
+            return false;
+        }
+       // _vector.push_back(num);
+        _deque.push_back(num);
+    }
+    if (_vector.size() < 2)
+    {
+        std::cerr<<"input at least 2 numbers"<<std::endl;
+        return false;
+    }
+    return true;
+}
 
-bool PmergeMe::storeNb(char **argv, int argc)
+bool PmergeMe::storeVector(char **argv, int argc)
 {
     for(int i = 1; i < argc; ++i)
     {
@@ -47,7 +68,7 @@ bool PmergeMe::storeNb(char **argv, int argc)
             return false;
         }
         _vector.push_back(num);
-        _deque.push_back(num);
+       // _deque.push_back(num);
     }
     if (_vector.size() < 2)
     {
@@ -187,12 +208,25 @@ void PmergeMe::sortDeque(std::deque<int> &d)
 }
 
 
-void PmergeMe::sort()
+void PmergeMe::sort(int argc, char **argv)
 {
-    
+    clock_t storeStart = clock();
+    if (storeVector(argv, argc) == false)
+        return ;
+    clock_t storeEnd = clock();
+    double timeToSore = static_cast<double>(storeEnd - storeStart) * 1000 / CLOCKS_PER_SEC;
+    std::cout<<"Time to store numbers in vector: "<<timeToSore<<" ms"<<std::endl;
+
+    storeStart = clock();
+    if (storeDeque(argv, argc) == false)
+        return ;
+    storeEnd = clock();
+    timeToSore = static_cast<double>(storeEnd - storeStart) * 1000 / CLOCKS_PER_SEC;
+    std::cout<<"Time to store numbers in Deque: "<<timeToSore<<" ms"<<std::endl;
+
     std::cout<<"Before : ";   
     for (size_t i = 0; i < _vector.size(); ++i)
-    std::cout<<_vector[i]<<" ";
+        std::cout<<_vector[i]<<" ";
     std::cout<<std::endl;
     
     clock_t vStart = clock();
@@ -205,7 +239,7 @@ void PmergeMe::sort()
     
     std::cout<<"After : "; 
     for (size_t i = 0; i < _vector.size(); ++i)
-        std::cout<<_vector[i]<<" ";
+        std::cout<<_deque[i]<<" ";
     std::cout<<std::endl;
 
     //====display time=====
